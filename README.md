@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Rickyngechu/simple-filters)
+- Solution URL: [Add solution URL here](https://github.com/Rickyngechu/simple-todoapp)
 - Live Site URL: [Add live site URL here](https://simple-filters.vercel.app/)
 
 ## My process
@@ -47,22 +47,18 @@ Users should be able to:
 
 - Tailwind css
 - React js
-- React router
+- DND kit
 - [React](https://reactjs.org/) - JS library
 - [Tailwindcss](https://tailwindcss.com/) - Tailwind css
-- [React Router](https://reactrouter.com/) - React router
+- [DndKit](https://docs.dndkit.com/) - Dnd kit for drag and drop
 
 ### What I learned
 
-Expirience in using react router with the userSearchParams hook for filtering.
-
-```js
-const [searchParams, setSearchParams] = useSearchParams();
-```
+Learned on using the DND kit for drag and dropping.
 
 ### Continued development
 
-More filtering capabilities to be added with darkmode capability.
+Implementing local storage of the todo items.
 
 ## Author
 
