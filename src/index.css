@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Ensuring there is smooth transition on changes made on the app */
+  * {
+    @apply transition-all duration-300 ease-out;
+  }
+  body {
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+}
+
+@layer components {
+  .header {
+    /* background-image: url("/bg-desktop-dark.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100%; */
+  }
+}
