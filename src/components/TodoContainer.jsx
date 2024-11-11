@@ -8,54 +8,8 @@ import FooterMobile from "./FooterMobile";
 function TodoContainer({ isDark, setIsDark }) {
   const [inputVal, setInputVal] = useState("");
 
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      taskName: "Washing the utensils",
-      done: true,
-    },
-    {
-      id: 2,
-      taskName: "Fixing some bugs",
-      done: false,
-    },
-    {
-      id: 3,
-      taskName: "Making dinner and coffee",
-      done: false,
-    },
-    {
-      id: 4,
-      taskName: "Sending the pending emails",
-      done: false,
-    },
-    {
-      id: 5,
-      taskName: "Delivering the dropshipping bought items",
-      done: false,
-    },
-    {
-      id: 6,
-      taskName: "Submitting the assignment which is due",
-      done: false,
-    },
-    {
-      id: 7,
-      taskName: "Making payments that are due.",
-      done: false,
-    },
-    {
-      id: 8,
-      taskName: "Making payments that are due.",
-      done: false,
-    },
-    {
-      id: 9,
-      taskName: "Making payments that are due.",
-      done: false,
-    },
-  ]);
-
+  const [tasks, setTasks] = useState([]);
+  console.log(tasks);
   const [filterVal, setFilterVal] = useState("all");
   const [filterItems, setFilterItems] = useState([]);
 
@@ -89,8 +43,8 @@ function TodoContainer({ isDark, setIsDark }) {
 
   /*Displaying only items which are not complete */
   function handleDeleteCompleted() {
-    const todoItems = tasks.filter(task => task.done === false);
-    setTasks(todoItems);
+    const todoItems = filterItems.filter(task => task.done != true);
+    setFilterItems(todoItems);
     setFilterVal("all");
   }
 
@@ -122,7 +76,7 @@ function TodoContainer({ isDark, setIsDark }) {
 
     setTasks(current => [
       {
-        id: tasks + 1,
+        id: tasks.length + 1,
         taskName: `${inputVal}`,
         done: false,
       },

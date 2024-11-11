@@ -39,7 +39,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://github.com/Rickyngechu/simple-todoapp)
-- Live Site URL: [Add live site URL here](https://simple-filters.vercel.app/)
+- Live Site URL: [Add live site URL here](https://simple-todoapp-nine.vercel.app/)
 
 ## My process
 
