@@ -24,6 +24,7 @@ function TodoListItemsContainer({
   filterVal,
   handleBtn,
   deleteTask,
+  tasks,
 }) {
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -68,7 +69,7 @@ function TodoListItemsContainer({
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={filterItems}>
-          {filterItems.length > 0 ? (
+          {tasks.length > 0 ? (
             filterItems?.map(task => (
               <TodoItem
                 strategy={verticalListSortingStrategy}

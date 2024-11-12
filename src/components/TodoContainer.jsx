@@ -8,48 +8,31 @@ import FooterMobile from "./FooterMobile";
 function TodoContainer({ isDark, setIsDark }) {
   const [inputVal, setInputVal] = useState("");
 
-  const [tasks, setTasks] = useState([]);
-  console.log(tasks);
+  const [tasks, setTasks] = useState(() => {
+    const localItems = localStorage.getItem("todo");
+    return localItems ? JSON.parse(localItems) : [];
+  });
+
   const [filterVal, setFilterVal] = useState("all");
   const [filterItems, setFilterItems] = useState([]);
 
   const numOfTasks = tasks?.length || filterItems?.length;
 
-  useEffect(
-    function () {
-      function handleFilterItems() {
-        if (tasks.length === 0) return;
-        setFilterItems(tasks);
-      }
-      handleFilterItems();
-    },
-    [tasks]
-  );
-
+  /**Setting the filter value based on the clicked filter */
   function handleFilter(filterVal) {
     setFilterVal(filterVal);
-    if (filterVal === "all") {
-      setFilterItems(tasks);
-    } else if (filterVal === "active") {
-      const items = tasks.filter(task => task.done === false);
-      setFilterItems(items);
-    } else if (filterVal === "completed") {
-      const items = tasks.filter(task => task.done === true);
-      setFilterItems(items);
-    } else {
-      return null;
-    }
   }
 
-  /*Displaying only items which are not complete */
+  /*Deletes all completed tasks */
   function handleDeleteCompleted() {
-    const todoItems = filterItems.filter(task => task.done != true);
-    setFilterItems(todoItems);
+    const todoItems = tasks.filter(task => task.done !== true);
+    setTasks(todoItems);
     setFilterVal("all");
   }
 
+  /**Toggling tasks done */
   function handleBtn(id) {
-    setFilterItems(prevTasks =>
+    setTasks(prevTasks =>
       prevTasks.map(task =>
         task.id === id ? { ...task, done: !task.done } : task
       )
@@ -60,7 +43,6 @@ function TodoContainer({ isDark, setIsDark }) {
   function deleteTask(id) {
     const task = tasks.filter(task => task.id !== id);
     setTasks(task);
-    setFilterVal("all");
   }
 
   /*Handling the input value */
@@ -69,6 +51,7 @@ function TodoContainer({ isDark, setIsDark }) {
     setInputVal(val);
   }
 
+  /**Handling the input todo tasks */
   function handleAddTodoItem(e) {
     e.preventDefault();
 
@@ -90,6 +73,39 @@ function TodoContainer({ isDark, setIsDark }) {
     setIsDark(current => !current);
   }
 
+  // Handling filters
+  useEffect(
+    function () {
+      function handleFilterItems() {
+        if (tasks.length === 0) return;
+        setFilterItems(tasks);
+
+        if (filterVal === "all") {
+          setFilterItems(tasks);
+        } else if (filterVal === "active") {
+          const items = tasks.filter(task => task.done === false);
+          setFilterItems(items);
+        } else if (filterVal === "completed") {
+          const items = tasks.filter(task => task.done === true);
+          setFilterItems(items);
+        } else {
+          return null;
+        }
+      }
+      handleFilterItems();
+    },
+    [tasks, filterVal]
+  );
+
+  // Handle local Storage deleting items and storing items.
+  useEffect(
+    function () {
+      localStorage.setItem("todo", JSON.stringify(tasks));
+    },
+    [tasks]
+  );
+
+  // Handling darkmode toggle
   useEffect(
     function () {
       function toggleDarkMode() {
@@ -134,6 +150,7 @@ function TodoContainer({ isDark, setIsDark }) {
             filterVal={filterVal}
             handleBtn={handleBtn}
             deleteTask={deleteTask}
+            tasks={tasks}
           />
         </div>
         <Footer
